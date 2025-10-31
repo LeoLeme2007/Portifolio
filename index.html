@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio — Léo Leme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="css.css">
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa6b2; --accent:#7c3aed; --glass: rgba(255,255,255,0.04);
+      --max-w:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#061226 0%, #071027 50%, #051019 100%);
+      color:#e6eef6; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .wrap{max-width:var(--max-w);margin:32px auto;padding:24px}
+
+    /* NAV */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}
+    .brand{display:flex;gap:14px;align-items:center;font-size: 25px;}
+    .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+    nav{display:flex;gap:12px;align-items:center}
+    .navlink{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600}
+    .navlink:hover{color:#fff;background:rgba(255,255,255,0.03)}
+    .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:700}
+    .div#avatar{ width:20px ; height: 20px;}
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px}
+    .intro{background:var(--card);padding:16px;border-radius:16px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    h1{margin:0 0 8px 0;font-size:28px}
+    p.lead{margin:0;color:var(--muted);line-height:1.5}
+    .cta-row{display:flex;gap:12px;margin-top:16px; padding: 5px;}
+
+    .card-short{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+    .avatar{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#ef7cda,#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:800}
+
+    /* SKILLS + PROJECTS */
+    
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+    .section{background:var(--card);padding:18px;border-radius:14px}
+    .skills{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:var(--glass);padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:600}
+
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .proj{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .proj h4{margin:0 0 8px 0}
+    .proj .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .contact-card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+    .muted{color:var(--muted);font-size:13px; padding:2px;border-radius:12px}
+    .msg{color:var(--muted);font-size:13px}
+
+    footer{margin-top:28px;color:var(--muted);text-align:center}
+
+    /* RESPONSIVE */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .grid{grid-template-columns:1fr}
+      .projects{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    /* small helpers */
+    .row{display:flex;gap:12px;align-items:center}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted)}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+    .modal.open{display:flex}
+    .modal-card{background:var(--card);padding:20px;border-radius:12px;max-width:920px;width:94%}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div>
+          <div style="font-weight:800">Léo Leme de Oliveira</div>
+          <div class="muted" style="font-size:17px">Profissional de TI • Desenvolvimento de software</div>
+        </div>
+      </div>
+
+      <nav>
+        <a class="navlink" href="#about">Sobre</a>
+        <a class="navlink" href="#projects">Projetos</a>
+        <a class="navlink" href="#skills">Habilidades</a>
+        <!--<button id="themeToggle" class="ghost" title="Alternar tema">Tema</button>!-->
+        <a class="btn" href="#contact">Contato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="intro">
+          <h1>Eu sou o <span style="color:var(--accent)">Léo</span></h1>
+          <br>
+          <p class="lead">FULL-STACK DEVELOPER</p>
+          <br>
+          <p class="lead">Sou profissional de TI com experiência em desenvolvimento de software, automação e administração de sistemas. Gosto de construir soluções simples que resolvem problemas reais.</p>
+
+          <div class="cta-row">
+            <a class="btn" href="#projects">Ver projetos</a>
+            <a class="navlink" href="https://github.com/LeoLeme2007" target="_blank">GitHub</a>
+            <a class="navlink" href="https://www.linkedin.com/in/leo-leme-de-oliveira-9951aa234" target="_blank">LinkedIn</a>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:18px;align-items:center">
+            <div class="card-short">
+              <div style="font-size:12px;color:var(--muted)">Atuação</div>
+              <div style="font-weight:700">Desenvolvolvedor  de software</div>
+            </div>
+            <div class="card-short">
+              <div style="font-size:12px;color:var(--muted)">Local</div>
+              <div style="font-weight:700">Mogi Mirim, SP</div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div class="card-short row">
+              <div class="avatar"><img src="CCL.jpeg" alt="Foto de perfil" style="width: 80px; height: auto; border-radius:8%; object-fit:cover;"></div>
+              <div>
+                <div style="font-weight:700">Léo Leme de Oliveira</div>
+                <div class="muted">TI | Dev | Analista</div>
+              </div>
+            </div>
+
+            <div class="card-short">
+              <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Resumo</div>
+              <div style="font-size:14px">Sou Léo Leme de Oliveira, formado em Informática para Internet pela ETEC Pedro Ferreira Alves e atualmente cursando Análise e Desenvolvimento de Sistemas na Fatec de Mogi Mirim. Apaixonado por tecnologia e programação, estou a procura de um estágio.</div>
+            </div>
+            <div class="card-short row" style="justify-content:space-between;align-items:center">
+              <div class="muted">Download CV</div>
+              <a class="btn" href="Léo Leme de Oliveira - Curriculo.pdf">Baixar</a>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="skills" class="grid">
+        <div class="section">
+          <h3>Habilidades</h3>
+          <p class="muted">Tecnologias e ferramentas que uso com frequência</p>
+          <div style="height:12px"></div>
+          <div class="skills">
+            <div class="skill">Python</div>
+            <div class="skill">HTML5</div>
+            <div class="skill">CSS</div>
+            <div class="skill">C</div>
+            <div class="skill">Office</div>
+            <div class="skill">365</div>
+                  <p class="muted">Tecnologias e ferramentas que uso com pouca frequência</p><br>
+            <div class="skill">JavaScript</div>
+            <div class="skill">SQL</div>
+            <div class="skill">Git / GitHub</div>
+            <div class="skill">PHP</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Cursos Complementares</h3>
+          <p class="muted">Principais cursos e competências</p>
+          <ul>
+            <li>Curso de Excel Intermediario.</li>
+            <br>
+            <li>Curso de Comunicacao escrita.</li>
+            <br>
+            <li>Curso de Comunicacao empresarial. </li>
+            <br>
+            <li>Curso de contabilidade empresarial.</li>
+            <br>
+            <li>Curso de Educacao financeira.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <h3>Projetos</h3>
+        <p class="muted">Clique em um projeto para ver mais detalhes</p>
+        <div style="height:12px"></div>
+        <div class="projects">
+          <div class="proj" onclick="openModal('Link do projeto:',' https://github.com/LeoLeme2007/TCC-aplicativo-academico-da-Etec-PFA')">
+            <h4>Aplicativo sobre Etec pedro ferreira alves</h4>
+            <p class="muted">Kodular • FireBase</p>
+            <div style="height:8px"></div>
+            <div class="tags"><span class="tag">Kodular</span><span class="tag">FireBase</span></div>
+          </div>
+        <br>
+          <div class="proj" onclick="openModal('Portifolio Pessoal','Site estático feito com HTML/CSS/JS, hospedado no GitHub.')">
+            <h4>Portifolio</h4>
+            <p class="muted">Python • CSS • HTML5 • javascript</p>
+            <div style="height:8px"></div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">CSS</span><span class="tag">HTML5</span><span class="tag">JavaScript</span></div>
+          </div>
+        <br>
+          <div class="proj" onclick="openModal('Site Acdemico para escola sanquin','Site funcional com banco de dados com funcoes como,ministrar aulas,controle de matriculas, faltas matrial de aula, dentre outras funcoes de um sistema academico. Projeto desenvolvido com HTML/CSS/JS/PHP/SQL/PhpMyadmin, hospedado no GitHub Pages no Link a seguir: https://github.com/LeoLeme2007/projeto-sanquim')">
+            <h4>Projeto academico para a escola Sanquim</h4>
+            <p class="muted">HTML • CSS • JS • PHP • SQL • PhpMyadmin</p>
+            <div style="height:8px"></div>
+            <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span><span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">PhpMyadmin</span></div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="contact" class="section" style="margin-top:18px">
+        <h3>Contato</h3>
+        <p class="muted">Quer trabalhar comigo ou conversar sobre um projeto? Manda uma mensagem.</p>
+
+        <div style="height:12px"></div>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div style="font-weight:900">Fale comigo</div>
+            <div class="muted" style="margin-bottom:8px">Email</div>
+            <div style="font-weight:900;word-break:break-all">leo.oliveira01@fatec.sp.gov.br</div>
+            <div class="muted" style="margin-top:8px">Telefone</div>
+            <div style="font-weight:900">(19)99880-2847</div>
+            <div style="margin-top:12px"><a class="btn" href="mailto:leo.oliveira01@fatec.sp.gov.br">Enviar email</a></div>
+          </div>
+
+          <div class="contact-card">
+            <form onsubmit="submitForm(event)">
+              <div style="font-weight:600">Seu Nome</div>
+              <input id="name" name="name" placeholder="Digite seu nome" required />
+              <div style="font-weight:600">Mensagem</div>
+              <textarea id="msg" name="msg" rows="5" placeholder="O que você precisa?" required></textarea>
+              <div style="height:12px"></div>
+              <button class="btn" type="submit">Enviar</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      
+      <footer>
+        copyright © 2025 por Léo Leme, todos os direitos reservados</span>
+      </footer>
+
+    </main>
+  </div>
+  
+  <!-- modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div id="modalTitle" style="font-weight:800"></div>
+        <button onclick="closeModal()" class="ghost">Fechar</button>
+      </div>
+      <div id="modalBody" class="muted">Descrição do projeto...</div>
+    </div>
+  </div>
+
+  <script>
+    // Smooth scroll for nav
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault(); const target=document.querySelector(a.getAttribute('href'));
+        if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+    // Modal
+    function openModal(title,body){
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalBody').textContent = body;
+      const m = document.getElementById('modal'); m.classList.add('open'); m.setAttribute('aria-hidden','false');
+    }
+    function closeModal(){const m=document.getElementById('modal');m.classList.remove('open');m.setAttribute('aria-hidden','true');}
+
+    // Contact form (simple) - opens mailto
+    function submitForm(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const msg = document.getElementById('msg').value.trim();
+      const subject = encodeURIComponent('Contato do portfólio — ' + name);
+      const body = encodeURIComponent(msg + '\n\n--\nEnviado pelo portfólio');
+      window.location.href = 'mailto:leo.oliveira01@fatec.sp.gov.br?subject='+subject+'&body='+body;
+    }
+
+    // Theme toggle (prefers-color-scheme aware)
+    const themeToggle = document.getElementById('themeToggle');
+    function applyTheme(t){
+      if(t === 'light'){
+        document.documentElement.style.setProperty('--bg','#f6f9fc');
+        document.documentElement.style.setProperty('--card','#ffffff');
+        document.documentElement.style.setProperty('--muted','#55606a');
+        document.documentElement.style.setProperty('--accent','#6b21a8');
+      } else {
+        document.documentElement.style.setProperty('--bg','#0f1724');
+        document.documentElement.style.setProperty('--card','#0b1220');
+        document.documentElement.style.setProperty('--muted','#9aa6b2');
+        document.documentElement.style.setProperty('--accent','#7c3aed');
+      }
+      localStorage.setItem('theme',t);
+    }
+    themeToggle.addEventListener('click',()=>{
+      const current = localStorage.getItem('theme') || 'dark';
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    // init theme
+    (function(){
+      const saved = localStorage.getItem('theme');
+      if(saved) applyTheme(saved);
+    })();
+
+  </script>
+</body>
+</html>

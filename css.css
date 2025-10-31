@@ -1,0 +1,29 @@
+/* Estilo base para suavidade */
+button, .btn, nav a, .navlink,  .skill-bubble, .profile-pic {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: inline-block; /* garante que funcione no scale */
+}
+
+/* Efeito ao passar o mouse */
+button:hover, .btn:hover, nav a:hover, 
+.skill-bubble:hover, .profile-pic:hover {
+  transform: scale(1.25);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Exemplo de classe para as bolinhas de habilidades */
+.skill-bubble {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background-color: #222; /* cor de fundo exemplo */
+  color: white;
+  font-weight: bold;
+}
+
+/* Exemplo para a foto de perfil */
+.profile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* deixa redonda */
+  object-fit: cover;
+}
